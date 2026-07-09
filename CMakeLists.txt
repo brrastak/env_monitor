@@ -63,10 +63,16 @@ target_include_directories(${EXECUTABLE}
 
 set(HAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/stm32f4xx-hal-driver)
 include(cmake/stm32_hal.cmake)
-
 target_link_libraries(${EXECUTABLE}
     PRIVATE
         hal
+)
+
+set(RTT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/rtt)
+include(cmake/rtt.cmake)
+target_link_libraries(${EXECUTABLE}
+    PRIVATE
+        rtt
 )
 
 find_program(CMAKE_SIZE_UTIL arm-none-eabi-size)
