@@ -44,6 +44,7 @@ add_executable(${EXECUTABLE}
     src/platform/cube_generated_init.c
     src/platform/startup_stm32f401xc.s
     src/platform/stm32f4xx_hal_msp.c
+    src/log/print_rtt.cpp
 )
 
 # C++ only options
@@ -73,6 +74,12 @@ include(cmake/rtt.cmake)
 target_link_libraries(${EXECUTABLE}
     PRIVATE
         rtt
+)
+
+add_subdirectory(external/etl)
+target_link_libraries(${EXECUTABLE}
+    PRIVATE
+        etl::etl
 )
 
 find_program(CMAKE_SIZE_UTIL arm-none-eabi-size)

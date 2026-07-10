@@ -13,3 +13,6 @@
 [submodule "external/rtt"]
 	path = external/rtt
 	url = https://github.com/SEGGERMicro/RTT.git
+[submodule "external/etl"]
+	path = external/etl
+	url = https://github.com/ETLCPP/etl.git
