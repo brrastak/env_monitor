@@ -5,7 +5,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    void Error_Handler(void);
     void MX_I2C1_Init(void);
     void MX_GPIO_Init(void);
     void MX_SPI2_Init(void);

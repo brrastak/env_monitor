@@ -1,4 +1,6 @@
 #include "cube_generated_init.h"
+// For error messages
+#include "SEGGER_RTT.h"
 
 
 I2C_HandleTypeDef hi2c1;
@@ -12,6 +14,7 @@ TIM_HandleTypeDef htim3;
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 
+void Error_Handler(const char* message);
 
 /**
   * @brief System Clock Configuration
@@ -41,7 +44,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_RCC_OscConfig failed");
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
@@ -55,7 +58,7 @@ void SystemClock_Config(void)
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_RCC_ClockConfig failed");
   }
 }
 
@@ -85,7 +88,7 @@ void MX_I2C1_Init(void)
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_I2C_Init failed");
   }
   /* USER CODE BEGIN I2C1_Init 2 */
 
@@ -109,11 +112,11 @@ void MX_IWDG_Init(void)
 
   /* USER CODE END IWDG_Init 1 */
   hiwdg.Instance = IWDG;
-  hiwdg.Init.Prescaler = IWDG_PRESCALER_4;
+  hiwdg.Init.Prescaler = IWDG_PRESCALER_32;
   hiwdg.Init.Reload = 4095;
   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_IWDG_Init failed");
   }
   /* USER CODE BEGIN IWDG_Init 2 */
 
@@ -151,7 +154,7 @@ void MX_SPI2_Init(void)
   hspi2.Init.CRCPolynomial = 10;
   if (HAL_SPI_Init(&hspi2) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_SPI_Init failed");
   }
   /* USER CODE BEGIN SPI2_Init 2 */
 
@@ -185,13 +188,13 @@ void MX_TIM3_Init(void)
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_TIM_PWM_Init failed");
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_TIMEx_MasterConfigSynchronization failed");
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
   sConfigOC.Pulse = 0;
@@ -199,7 +202,7 @@ void MX_TIM3_Init(void)
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler("HAL_TIM_PWM_ConfigChannel failed");
   }
   /* USER CODE BEGIN TIM3_Init 2 */
 
@@ -293,16 +296,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-void Error_Handler(void)
+void Error_Handler(const char* message)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
+  SEGGER_RTT_printf(0, "[ERROR]: %s\r\n", message);
   __disable_irq();
   while (1)
   {
   }
-  /* USER CODE END Error_Handler_Debug */
+
 }
+
 #ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
