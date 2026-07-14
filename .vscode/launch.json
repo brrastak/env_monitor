@@ -7,13 +7,17 @@
         {
             "name": "Cortex Debug (OpenOCD)",
             "cwd": "${workspaceFolder}",
-            "executable": "./build",
+            "executable": "./build/env_monitor.elf",
             "request": "launch",
             "type": "cortex-debug",
-            "runToEntryPoint": "startup",
-            "servertype": "stlink",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",
             "device": "STM32F401CC",
-            "svdFile": "./svd/STM32F401.svd"
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "svdFile": "./svd/STM32F401.svd",
             // "svdFile": "./svd/ARMCM3.svd"
         }
     ]
