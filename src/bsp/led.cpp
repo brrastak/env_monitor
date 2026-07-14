@@ -11,14 +11,16 @@ Led::Led(GPIO_TypeDef* port, uint16_t pin)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(m_port, &GPIO_InitStruct);
+
+    off();
 }
 
 void Led::on() {
-    HAL_GPIO_WritePin(m_port, m_pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(m_port, m_pin, GPIO_PIN_RESET);
 }
 
 void Led::off() {
-    HAL_GPIO_WritePin(m_port, m_pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(m_port, m_pin, GPIO_PIN_SET);
 }
 
 void Led::blink() {
