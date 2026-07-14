@@ -31,20 +31,26 @@ add_link_options(
     --specs=nano.specs
     --specs=nosys.specs
     -Wl,--cref,-Map=${PROJECT_NAME}.map
+    -Wl,--print-memory-usage
 )
 
 set(EXECUTABLE ${PROJECT_NAME}.elf)
 
 add_executable(${EXECUTABLE}
     src/app/main.cpp
+
     src/bsp/board.cpp
     src/bsp/led.cpp
+
+    src/log/print_rtt.cpp
 
     src/platform/syscalls.c
     src/platform/cube_generated_init.c
     src/platform/startup_stm32f401xc.s
     src/platform/stm32f4xx_hal_msp.c
-    src/log/print_rtt.cpp
+    src/platform/stm32f4xx_hal_timebase_tim.c
+    src/platform/system_stm32f4xx.c
+    src/platform/stm32f4xx_it.c
 )
 
 # C++ only options
@@ -58,18 +64,18 @@ target_compile_options(${EXECUTABLE} PRIVATE
 
 target_include_directories(${EXECUTABLE}
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
-        ${CMAKE_CURRENT_SOURCE_DIR}/config
+        ${PROJECT_SOURCE_DIR}/src
+        ${PROJECT_SOURCE_DIR}/config
 )
 
-set(HAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/stm32f4xx-hal-driver)
+set(HAL_DIR ${PROJECT_SOURCE_DIR}/external/stm32f4xx-hal-driver)
 include(cmake/stm32_hal.cmake)
 target_link_libraries(${EXECUTABLE}
     PRIVATE
         hal
 )
 
-set(RTT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/rtt)
+set(RTT_DIR ${PROJECT_SOURCE_DIR}/external/rtt)
 include(cmake/rtt.cmake)
 target_link_libraries(${EXECUTABLE}
     PRIVATE
