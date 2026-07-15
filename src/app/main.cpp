@@ -9,11 +9,13 @@ int main() {
 
     auto board = bsp::Board();
     auto led = board.led;
+    auto iwdg = board.iwdg;
 
     logging::info("Initialization completed");
 
     while (true) {
         HAL_Delay(1000);
+        iwdg.feed();
         led.blink();
         logging::info("Blink!");
     }

@@ -1,10 +1,13 @@
 #include "board.hpp" 
+#include "iwdg.hpp"
 #include "platform/cube_generated_init.h"
 
 namespace bsp {
 
+using namespace etl::chrono_literals;
+
 Board::Board()
-    : led{GPIOC, GPIO_PIN_13} {
+    : led{GPIOC, GPIO_PIN_13}, iwdg{1200_ms} {
 
     HAL_Init();
 
@@ -14,7 +17,6 @@ Board::Board()
     MX_I2C1_Init();
     MX_SPI2_Init();
     MX_TIM3_Init();
-    MX_IWDG_Init();
 }
 
 }

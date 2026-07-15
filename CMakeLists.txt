@@ -41,6 +41,7 @@ add_executable(${EXECUTABLE}
 
     src/bsp/board.cpp
     src/bsp/led.cpp
+    src/bsp/iwdg.cpp
 
     src/log/print_rtt.cpp
 
