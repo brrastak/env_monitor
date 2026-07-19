@@ -14,6 +14,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(MCU_OPTIONS
     -mcpu=cortex-m4
     -mthumb
+    -mfpu=fpv4-sp-d16
+    -mfloat-abi=hard
 )
 
 add_compile_options(
@@ -69,24 +71,27 @@ target_include_directories(${EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/config
 )
 
+add_library(freertos_config INTERFACE)
+target_include_directories(freertos_config SYSTEM
+    INTERFACE
+        ${PROJECT_SOURCE_DIR}/config
+)
+set( FREERTOS_HEAP "4" CACHE STRING "" FORCE)
+# Select the native compile PORT
+set( FREERTOS_PORT "GCC_ARM_CM4F" CACHE STRING "" FORCE)
+
 set(HAL_DIR ${PROJECT_SOURCE_DIR}/external/stm32f4xx-hal-driver)
 include(cmake/stm32_hal.cmake)
+set(RTT_DIR ${PROJECT_SOURCE_DIR}/external/rtt)
+include(cmake/rtt.cmake)
+add_subdirectory(external/etl)
+add_subdirectory(external/freertos/FreeRTOS/Source)
 target_link_libraries(${EXECUTABLE}
     PRIVATE
         hal
-)
-
-set(RTT_DIR ${PROJECT_SOURCE_DIR}/external/rtt)
-include(cmake/rtt.cmake)
-target_link_libraries(${EXECUTABLE}
-    PRIVATE
         rtt
-)
-
-add_subdirectory(external/etl)
-target_link_libraries(${EXECUTABLE}
-    PRIVATE
         etl::etl
+        freertos_kernel
 )
 
 find_program(CMAKE_SIZE_UTIL arm-none-eabi-size)
@@ -104,50 +109,3 @@ add_custom_command(TARGET ${EXECUTABLE}
     COMMAND ${CMAKE_OBJCOPY} -O ihex ${EXECUTABLE} ${PROJECT_NAME}.hex
     COMMAND ${CMAKE_OBJCOPY} -O binary ${EXECUTABLE} ${PROJECT_NAME}.bin
 )
-
-
-# # Specify source files
-# set(SOURCES
-#     src/main.c
-#     src/stm32f4xx_hal.c
-#     src/system_stm32f4xx.c
-# )
-
-# # Include directories
-# include_directories(
-#     ${CMAKE_SOURCE_DIR}/include
-#     ${CMAKE_SOURCE_DIR}/Drivers/STM32F4xx_HAL_Driver/Inc
-# )
-
-# # Create the executable
-# add_executable(${PROJECT_NAME}.elf ${SOURCES})
-
-# # Linker options for embedded
-# target_link_options(${PROJECT_NAME}.elf PRIVATE
-#     "-T${CMAKE_SOURCE_DIR}/STM32F407VG_FLASH.ld"
-# )
-
-# # Compiler options for embedded
-# target_compile_options(${PROJECT_NAME}.elf PRIVATE
-#     -mcpu=${TARGET_ARM_MCU}
-#     -mthumb
-#     -O2
-# )
-
-# # Include FreeRTOS headers
-# include_directories(${CMAKE_SOURCE_DIR}/FreeRTOS/Source/include)
-
-# # Add FreeRTOS source files
-# set(FREERTOS_SOURCES
-#     FreeRTOS/Source/portable/MemMang/heap_4.c
-#     FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
-#     FreeRTOS/Source/tasks.c
-# )
-
-# # Add FreeRTOS to your target
-# target_sources(${PROJECT_NAME}.elf PRIVATE ${FREERTOS_SOURCES})
-
-# add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
-#  COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
-#  COMMENT "Generating binary file"
-# )
