@@ -7,7 +7,7 @@ namespace bsp {
 using namespace etl::chrono_literals;
 
 Board::Board()
-    : led{GPIOC, GPIO_PIN_13}, iwdg{1200_ms} {
+    : led{GPIOC, GPIO_PIN_13}, iwdg{500_ms} {
 
     HAL_Init();
 

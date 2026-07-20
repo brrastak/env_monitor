@@ -69,6 +69,7 @@ target_include_directories(${EXECUTABLE}
     PUBLIC
         ${PROJECT_SOURCE_DIR}/src
         ${PROJECT_SOURCE_DIR}/config
+        ${PROJECT_SOURCE_DIR}/rtos
 )
 
 add_library(freertos_config INTERFACE)
