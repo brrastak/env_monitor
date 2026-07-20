@@ -10,8 +10,8 @@ int main() {
     logging::init();
 
     static auto board = bsp::Board();
-    static auto led = board.led;
-    static auto iwdg = board.iwdg;
+    static auto led = board.led();
+    static auto iwdg = board.iwdg();
 
     logging::info("Initialization completed");
 
