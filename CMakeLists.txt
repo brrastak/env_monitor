@@ -90,6 +90,7 @@ add_subdirectory(external/etl)
 add_subdirectory(external/freertos/FreeRTOS/Source)
 set(SENSIRION_DIR ${PROJECT_SOURCE_DIR}/lib/sensirion-i2c)
 include(cmake/sensirion.cmake)
+include(cmake/lvgl.cmake)
 target_link_libraries(${EXECUTABLE}
     PRIVATE
         hal
@@ -97,6 +98,7 @@ target_link_libraries(${EXECUTABLE}
         etl::etl
         freertos_kernel
         sensirion
+        lvgl
 )
 
 find_program(CMAKE_SIZE_UTIL arm-none-eabi-size)

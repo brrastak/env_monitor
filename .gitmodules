@@ -19,3 +19,6 @@
 [submodule "external/freertos"]
 	path = external/freertos
 	url = https://github.com/FreeRTOS/FreeRTOS.git
+[submodule "external/lvgl"]
+	path = external/lvgl
+	url = https://github.com/lvgl/lvgl.git
