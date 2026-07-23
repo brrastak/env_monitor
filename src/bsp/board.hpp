@@ -2,7 +2,7 @@
 
 #include "led.hpp"
 #include "iwdg.hpp"
-
+#include "sensor.hpp"
 
 namespace bsp {
 
@@ -12,6 +12,7 @@ public:
     Board();
     Led led();
     Iwdg iwdg();
+    Sensor sensor();
 };
 
 }

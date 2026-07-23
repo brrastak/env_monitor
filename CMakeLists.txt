@@ -44,6 +44,7 @@ add_executable(${EXECUTABLE}
     src/bsp/board.cpp
     src/bsp/led.cpp
     src/bsp/iwdg.cpp
+    src/bsp/sensor.cpp
 
     src/log/print_rtt.cpp
 
@@ -87,12 +88,15 @@ set(RTT_DIR ${PROJECT_SOURCE_DIR}/external/rtt)
 include(cmake/rtt.cmake)
 add_subdirectory(external/etl)
 add_subdirectory(external/freertos/FreeRTOS/Source)
+set(SENSIRION_DIR ${PROJECT_SOURCE_DIR}/lib/sensirion-i2c)
+include(cmake/sensirion.cmake)
 target_link_libraries(${EXECUTABLE}
     PRIVATE
         hal
         rtt
         etl::etl
         freertos_kernel
+        sensirion
 )
 
 find_program(CMAKE_SIZE_UTIL arm-none-eabi-size)

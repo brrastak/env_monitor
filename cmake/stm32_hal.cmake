@@ -15,7 +15,7 @@ target_include_directories(hal
     SYSTEM PUBLIC
         ${HAL_DIR}/Inc
 
-    PRIVATE
+    PUBLIC
         ${CMAKE_SOURCE_DIR}/config
 )
 
