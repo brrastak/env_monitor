@@ -3,10 +3,7 @@
         {
             "name": "Stm32",
             "includePath": [
-                "${workspaceFolder}/src/*",
-                "${workspaceFolder}/src/bsp",
-                "${workspaceFolder}/src/hal",
-                "${workspaceFolder}/src/hal/STM32F4xx_HAL_Driver/Inc"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "compilerPath": "/opt/gcc-arm-none-eabi/bin/arm-none-eabi-g++",
