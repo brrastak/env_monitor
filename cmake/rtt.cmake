@@ -1,3 +1,5 @@
+set(RTT_DIR ${PROJECT_SOURCE_DIR}/external/rtt)
+
 add_library(rtt STATIC
     ${RTT_DIR}/RTT/SEGGER_RTT.c
     ${RTT_DIR}/RTT/SEGGER_RTT_printf.c

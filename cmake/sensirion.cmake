@@ -1,3 +1,5 @@
+set(SENSIRION_DIR ${PROJECT_SOURCE_DIR}/lib/sensirion-i2c)
+
 add_library(sensirion STATIC
     ${SENSIRION_DIR}/src/sensirion_i2c.c
     ${SENSIRION_DIR}/src/scd4x_i2c.c

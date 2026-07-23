@@ -11,7 +11,7 @@ target_compile_definitions(cmsis PUBLIC
 )
 
 set(CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/cmsis-core)
-include(cmake/stm32_core.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/stm32_core.cmake)
 
 target_link_libraries(cmsis
     PUBLIC

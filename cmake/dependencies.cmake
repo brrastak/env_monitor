@@ -1,0 +1,6 @@
+include(${CMAKE_CURRENT_LIST_DIR}/stm32_hal.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/rtt.cmake)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/etl)
+include(${CMAKE_CURRENT_LIST_DIR}/freertos.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/sensirion.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/lvgl.cmake)

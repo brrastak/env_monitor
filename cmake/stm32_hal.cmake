@@ -1,3 +1,5 @@
+set(HAL_DIR ${PROJECT_SOURCE_DIR}/external/stm32f4xx-hal-driver)
+
 add_library(hal STATIC
     ${HAL_DIR}/Src/stm32f4xx_hal.c
     ${HAL_DIR}/Src/stm32f4xx_hal_gpio.c
@@ -24,7 +26,7 @@ target_compile_definitions(hal PUBLIC
 )
 
 set(CMSIS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/cmsis-device-f4)
-include(cmake/stm32_cmsis.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/stm32_cmsis.cmake)
 
 target_link_libraries(hal
     PUBLIC

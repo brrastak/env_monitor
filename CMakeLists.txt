@@ -73,24 +73,7 @@ target_include_directories(${EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/rtos
 )
 
-add_library(freertos_config INTERFACE)
-target_include_directories(freertos_config SYSTEM
-    INTERFACE
-        ${PROJECT_SOURCE_DIR}/config
-)
-set( FREERTOS_HEAP "4" CACHE STRING "" FORCE)
-# Select the native compile PORT
-set( FREERTOS_PORT "GCC_ARM_CM4F" CACHE STRING "" FORCE)
-
-set(HAL_DIR ${PROJECT_SOURCE_DIR}/external/stm32f4xx-hal-driver)
-include(cmake/stm32_hal.cmake)
-set(RTT_DIR ${PROJECT_SOURCE_DIR}/external/rtt)
-include(cmake/rtt.cmake)
-add_subdirectory(external/etl)
-add_subdirectory(external/freertos/FreeRTOS/Source)
-set(SENSIRION_DIR ${PROJECT_SOURCE_DIR}/lib/sensirion-i2c)
-include(cmake/sensirion.cmake)
-include(cmake/lvgl.cmake)
+include(cmake/dependencies.cmake)
 target_link_libraries(${EXECUTABLE}
     PRIVATE
         hal
