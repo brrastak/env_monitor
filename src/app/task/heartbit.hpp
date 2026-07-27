@@ -13,9 +13,10 @@ namespace task {
 
 class Heartbit : public rtos::Task {
 public:
-    Heartbit(bsp::Led& led, rtos::TaskPriority priority, size_t stackSize = rtos::MIN_STACK_SIZE)
-        : Task{priority, stackSize}, m_led{led} {}
-
+    static void create(bsp::Led& led, rtos::TaskPriority priority, size_t stackSize = rtos::MIN_STACK_SIZE) {
+        static Heartbit instance{led, priority, stackSize};
+    }
+    
 protected:
     void runner() override {
         while (true) {
@@ -30,6 +31,9 @@ protected:
     }
 
 private:
+    Heartbit(bsp::Led& led, rtos::TaskPriority priority, size_t stackSize)
+        : Task{priority, stackSize}, m_led{led} {}
+
     bsp::Led& m_led;
 };
 

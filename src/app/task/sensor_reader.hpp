@@ -13,8 +13,9 @@ namespace task {
 
 class SensorReader : public rtos::Task {
 public:
-    SensorReader(bsp::Sensor& sensor, rtos::TaskPriority priority, size_t stackSize = rtos::MIN_STACK_SIZE)
-        : Task{priority, stackSize}, m_sensor{sensor} {}
+    static void create(bsp::Sensor& sensor, rtos::TaskPriority priority, size_t stackSize = rtos::MIN_STACK_SIZE){
+        static SensorReader instance{sensor, priority, stackSize};
+    }
 
 protected:
     void runner() override {
@@ -55,6 +56,9 @@ protected:
     }
 
 private:
+    SensorReader(bsp::Sensor& sensor, rtos::TaskPriority priority, size_t stackSize)
+        : Task{priority, stackSize}, m_sensor{sensor} {}
+
     bsp::Sensor& m_sensor;
 };
 

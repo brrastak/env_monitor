@@ -10,7 +10,7 @@ namespace rtos {
 /// @brief Base class for tasks. Inherit from this class and implement the runner() method to create a task.
 class Task {
 public:
-    Task(TaskPriority priority, size_t stackSize = MIN_STACK_SIZE) {
+    Task(TaskPriority priority, size_t stackSize) {
 
         // Scheduler will call TaskBase::entry(this) === this->runner() when the task is started.
         // All the task parameters should be passed to the constructor of the derived class

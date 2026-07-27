@@ -17,9 +17,9 @@ int main() {
 
     logging::info("Initialization completed");
 
-    static auto heartbit = task::Heartbit{led, rtos::TaskPriority::Normal};
-    static auto sensor_reader = task::SensorReader{sensor, rtos::TaskPriority::Normal, 500};
-    static auto iwdgFeeder = task::IwdgFeeder{iwdg, rtos::TaskPriority::Iwdg};
+    task::Heartbit::create(led, rtos::TaskPriority::Normal);
+    task::SensorReader::create(sensor, rtos::TaskPriority::Normal, 500);
+    task::IwdgFeeder::create(iwdg, rtos::TaskPriority::Iwdg);
 
     rtos::scheduler::start();
 
