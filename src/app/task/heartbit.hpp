@@ -22,7 +22,7 @@ protected:
         while (true) {
             rtos::delay(1000_ms);
             m_led.blink();
-            logging::info("Blink!");
+            logging::trace("Blink!");
         }
     }
 

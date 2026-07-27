@@ -47,6 +47,7 @@ add_executable(${EXECUTABLE}
     src/bsp/sensor.cpp
 
     src/log/print_rtt.cpp
+    src/log/level.cpp
 
     src/platform/syscalls.c
     src/platform/cube_generated_init.c
