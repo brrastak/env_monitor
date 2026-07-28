@@ -56,7 +56,7 @@
 
 #if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
 /** Memory size in bytes (Needs to be at least 2kB (2048)) */
-#define LV_MEM_SIZE 65536
+#define LV_MEM_SIZE (16 * 1024u)
 
 /** Address for the memory pool instead of allocating it as a normal array. 0: unused */
 #define LV_MEM_ADR 0x0
@@ -168,7 +168,7 @@
  *  it is buffered into a "simple" layer before rendering. The widget can be buffered in smaller chunks.
  *  "Transformed layers" (if `transform_angle/zoom` are set) use larger buffers and can't be drawn in chunks.
  */
-#define LV_DRAW_LAYER_SIMPLE_BUF_SIZE 24576
+#define LV_DRAW_LAYER_SIMPLE_BUF_SIZE 4096
 
 /** Limit the max allocated memory for simple and transformed layers.
  *  It should be at least `LV_DRAW_LAYER_SIMPLE_BUF_SIZE` sized but if transformed layers are also used
@@ -222,34 +222,34 @@
 #define LV_DRAW_SW_SUPPORT_RGB565 1
 
 /** Enable support for RGB565 swapped color format */
-#define LV_DRAW_SW_SUPPORT_RGB565_SWAPPED 1
+#define LV_DRAW_SW_SUPPORT_RGB565_SWAPPED 0
 
 /** Enable support for RGB565A8 color format */
-#define LV_DRAW_SW_SUPPORT_RGB565A8 1
+#define LV_DRAW_SW_SUPPORT_RGB565A8 0
 
 /** Enable support for RGB888 color format */
-#define LV_DRAW_SW_SUPPORT_RGB888 1
+#define LV_DRAW_SW_SUPPORT_RGB888 0
 
 /** Enable support for XRGB8888 color format */
-#define LV_DRAW_SW_SUPPORT_XRGB8888 1
+#define LV_DRAW_SW_SUPPORT_XRGB8888 0
 
 /** Enable support for ARGB8888 color format */
-#define LV_DRAW_SW_SUPPORT_ARGB8888 1
+#define LV_DRAW_SW_SUPPORT_ARGB8888 0
 
 /** Enable support for ARGB8888 premultiplied color format */
-#define LV_DRAW_SW_SUPPORT_ARGB8888_PREMULTIPLIED 1
+#define LV_DRAW_SW_SUPPORT_ARGB8888_PREMULTIPLIED 0
 
 /** Enable support for L8 color format */
-#define LV_DRAW_SW_SUPPORT_L8 1
+#define LV_DRAW_SW_SUPPORT_L8 0
 
 /** Enable support for AL88 color format */
-#define LV_DRAW_SW_SUPPORT_AL88 1
+#define LV_DRAW_SW_SUPPORT_AL88 0
 
 /** Enable support for A8 color format */
-#define LV_DRAW_SW_SUPPORT_A8 1
+#define LV_DRAW_SW_SUPPORT_A8 0
 
 /** Enable support for I1 color format */
-#define LV_DRAW_SW_SUPPORT_I1 1
+#define LV_DRAW_SW_SUPPORT_I1 0
 
 #if LV_DRAW_SW_SUPPORT_I1
 /** Luminance threshold for a pixel to be active */
@@ -272,7 +272,7 @@
 /** 0: use a simple renderer capable of drawing only simple rectangles with gradient, images, texts, and straight lines only,
  *  1: use a complex renderer capable of drawing rounded corners, shadow, skew lines, and arcs too.
  */
-#define LV_DRAW_SW_COMPLEX 1
+#define LV_DRAW_SW_COMPLEX 0
 
 /** Increase this to allow more stops.
  *  This adds (sizeof(lv_color_t) + 1) bytes per additional stop
@@ -671,7 +671,7 @@
 #define LV_USE_FLOAT 0
 
 /** Enable an observer pattern implementation */
-#define LV_USE_OBSERVER 1
+#define LV_USE_OBSERVER 0
 
 /** Enable text translation support */
 #define LV_USE_TRANSLATION 0
@@ -686,7 +686,7 @@
  *============================================================================*/
 
 /** Enable log module */
-#define LV_USE_LOG 0
+#define LV_USE_LOG 1
 
 #if LV_USE_LOG
 /** Specify how important log should be added.
@@ -698,7 +698,7 @@
  *  - LV_LOG_LEVEL_USER: Only logs added by the user
  *  - LV_LOG_LEVEL_NONE: Do not log anything
  */
-#define LV_LOG_LEVEL LV_LOG_LEVEL_WARN
+#define LV_LOG_LEVEL LV_LOG_LEVEL_INFO
 
 /** Use printf for log output.
  *  If not set the user needs to register a callback with `lv_log_register_print_cb`.
@@ -706,10 +706,10 @@
 #define LV_LOG_PRINTF 0
 
 /** Enable print timestamp */
-#define LV_LOG_USE_TIMESTAMP 1
+#define LV_LOG_USE_TIMESTAMP 0
 
 /** Enable print file and line number */
-#define LV_LOG_USE_FILE_LINE 1
+#define LV_LOG_USE_FILE_LINE 0
 
 /** Enable/Disable LV_LOG_TRACE in mem module */
 #define LV_LOG_TRACE_MEM 1
@@ -746,7 +746,7 @@
  *============================================================================*/
 
 /** A simple, impressive and very complete theme */
-#define LV_USE_THEME_DEFAULT 1
+#define LV_USE_THEME_DEFAULT 0
 
 #if LV_USE_THEME_DEFAULT
 /** Yes to set dark mode, No to set light mode */
@@ -761,10 +761,10 @@
 #endif /*LV_USE_THEME_DEFAULT*/
 
 /** A very simple theme that is a good starting point for a custom theme */
-#define LV_USE_THEME_SIMPLE 1
+#define LV_USE_THEME_SIMPLE 0
 
 /** A theme designed for monochrome displays */
-#define LV_USE_THEME_MONO 1
+#define LV_USE_THEME_MONO 0
 
 
 
@@ -773,10 +773,10 @@
  *============================================================================*/
 
 /** A layout similar to Flexbox in CSS. */
-#define LV_USE_FLEX 1
+#define LV_USE_FLEX 0
 
 /** A layout similar to Grid in CSS. */
-#define LV_USE_GRID 1
+#define LV_USE_GRID 0
 
 
 
@@ -1135,16 +1135,16 @@
 #endif /*LV_DRAW_HAS_3D_SUPPORT*/
 
 /** Anim image */
-#define LV_USE_ANIMIMG 1
+#define LV_USE_ANIMIMG 0
 
 /** Arc */
 #define LV_USE_ARC 1
 
 /** Arc Label */
-#define LV_USE_ARCLABEL 1
+#define LV_USE_ARCLABEL 0
 
 /** Bar */
-#define LV_USE_BAR 1
+#define LV_USE_BAR 0
 
 /** Barcode code library
  *
@@ -1153,13 +1153,13 @@
 #define LV_USE_BARCODE 0
 
 /** Button */
-#define LV_USE_BUTTON 1
+#define LV_USE_BUTTON 0
 
 /** Button matrix */
-#define LV_USE_BUTTONMATRIX 1
+#define LV_USE_BUTTONMATRIX 0
 
 /** Calendar */
-#define LV_USE_CALENDAR 1
+#define LV_USE_CALENDAR 0
 
 #if LV_USE_CALENDAR
 /** Calendar week starts monday */
@@ -1237,19 +1237,19 @@
  *
  *  Enable: LV_USE_IMAGE
  */
-#define LV_USE_CANVAS 1
+#define LV_USE_CANVAS 0
 
 /** Chart */
 #define LV_USE_CHART 1
 
 /** Check Box */
-#define LV_USE_CHECKBOX 1
+#define LV_USE_CHECKBOX 0
 
 /** Drop down list
  *
  *  Enable: LV_USE_LABEL
  */
-#define LV_USE_DROPDOWN 1
+#define LV_USE_DROPDOWN 0
 
 /** FFmpeg library for image decoding and playing videos.
  *  Supports all major image formats so do not enable other image decoder with it.
@@ -1305,10 +1305,10 @@
  *
  *  Enable: LV_USE_LABEL
  */
-#define LV_USE_IMAGE 1
+#define LV_USE_IMAGE 0
 
 /** ImageButton */
-#define LV_USE_IMAGEBUTTON 1
+#define LV_USE_IMAGEBUTTON 0
 
 /** Enable Pinyin input method
  *
@@ -1337,17 +1337,17 @@
 #endif /*LV_USE_IME_PINYIN*/
 
 /** Keyboard */
-#define LV_USE_KEYBOARD 1
+#define LV_USE_KEYBOARD 0
 
 /** Label */
 #define LV_USE_LABEL 1
 
 #if LV_USE_LABEL
 /** Enable selecting text of the label */
-#define LV_LABEL_TEXT_SELECTION 1
+#define LV_LABEL_TEXT_SELECTION 0
 
 /** Store extra some info in labels (12 bytes) to speed up drawing of very long texts */
-#define LV_LABEL_LONG_TXT_HINT 1
+#define LV_LABEL_LONG_TXT_HINT 0
 
 /** The count of wait chart */
 #define LV_LABEL_WAIT_CHAR_COUNT 3
@@ -1355,13 +1355,13 @@
 #endif /*LV_USE_LABEL*/
 
 /** LED */
-#define LV_USE_LED 1
+#define LV_USE_LED 0
 
 /** Line */
-#define LV_USE_LINE 1
+#define LV_USE_LINE 0
 
 /** List */
-#define LV_USE_LIST 1
+#define LV_USE_LIST 0
 
 #if LV_DRAW_HAS_VECTOR_SUPPORT
 #if LV_USE_THORVG
@@ -1375,10 +1375,10 @@
 #endif /*LV_DRAW_HAS_VECTOR_SUPPORT*/
 
 /** Menu */
-#define LV_USE_MENU 1
+#define LV_USE_MENU 0
 
 /** Msgbox */
-#define LV_USE_MSGBOX 1
+#define LV_USE_MSGBOX 0
 
 /** QR code library
  *
@@ -1393,19 +1393,19 @@
  *
  *  Enable: LV_USE_LABEL
  */
-#define LV_USE_ROLLER 1
+#define LV_USE_ROLLER 0
 
 /** Scale */
-#define LV_USE_SCALE 1
+#define LV_USE_SCALE 0
 
 /** Slider
  *
  *  Enable: LV_USE_BAR
  */
-#define LV_USE_SLIDER 1
+#define LV_USE_SLIDER 0
 
 /** Span */
-#define LV_USE_SPAN 1
+#define LV_USE_SPAN 0
 
 #if LV_USE_SPAN
 /** Maximum number of span descriptor */
@@ -1414,19 +1414,19 @@
 #endif /*LV_USE_SPAN*/
 
 /** Spinbox */
-#define LV_USE_SPINBOX 1
+#define LV_USE_SPINBOX 0
 
 /** Spinner */
-#define LV_USE_SPINNER 1
+#define LV_USE_SPINNER 0
 
 /** Switch */
-#define LV_USE_SWITCH 1
+#define LV_USE_SWITCH 0
 
 /** Text area
  *
  *  Enable: LV_USE_LABEL
  */
-#define LV_USE_TEXTAREA 1
+#define LV_USE_TEXTAREA 0
 
 #if LV_USE_TEXTAREA
 /** Text area def. pwd show time [ms] */
@@ -1435,16 +1435,16 @@
 #endif /*LV_USE_TEXTAREA*/
 
 /** Table */
-#define LV_USE_TABLE 1
+#define LV_USE_TABLE 0
 
 /** Tabview */
-#define LV_USE_TABVIEW 1
+#define LV_USE_TABVIEW 0
 
 /** Tileview */
-#define LV_USE_TILEVIEW 1
+#define LV_USE_TILEVIEW 0
 
 /** Win */
-#define LV_USE_WIN 1
+#define LV_USE_WIN 0
 
 
 
@@ -1517,13 +1517,13 @@
  *  port. Use this if your specific LCD controller is not listed among
  *  the dedicated drivers below.
  */
-#define LV_USE_GENERIC_MIPI 0
+#define LV_USE_GENERIC_MIPI 1
 
 /** Drivers for LCD devices connected via SPI/parallel port
  *
  *  Enable: LV_USE_GENERIC_MIPI
  */
-#define LV_USE_ST7735 0
+#define LV_USE_ST7735 1
 
 /** Use ST7789 LCD driver
  *
