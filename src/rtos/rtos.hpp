@@ -1,6 +1,7 @@
 /// FreeRTOS wrapper functions
 #pragma once
 
+#include "etl/chrono.h"
 #include "FreeRTOS.h"
 #include "FreeRTOSConfig.h"
 #include "task.h"
