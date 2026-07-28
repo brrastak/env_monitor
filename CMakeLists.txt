@@ -40,6 +40,7 @@ set(EXECUTABLE ${PROJECT_NAME}.elf)
 
 add_executable(${EXECUTABLE}
     src/app/main.cpp
+    src/app/task/gui.cpp
 
     src/bsp/board.cpp
     src/bsp/led.cpp
