@@ -15,11 +15,9 @@ void Gui::runner() {
 Gui::Gui(rtos::TaskPriority priority, size_t stackSize)
     : Task{priority, stackSize} {
 
-    // Register LVGL log callback
-    lv_log_register_print_cb(log_lvgl);
+    
 
-    lv_init();
-    logging::info("LVGL initialization completed");
+    
 }
 
 }

@@ -1,4 +1,5 @@
-#include "board.hpp" 
+#include "lvgl_init.hpp"
+#include "board.hpp"
 #include "etl/chrono.h"
 #include "platform/cube_generated_init.h"
 
@@ -17,6 +18,8 @@ Board::Board() {
     MX_I2C1_Init();
     MX_SPI2_Init();
     MX_TIM3_Init();
+
+    lvgl::init();
 }
 
 Led Board::led() {
