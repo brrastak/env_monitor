@@ -57,6 +57,8 @@ add_executable(${EXECUTABLE}
     src/platform/stm32f4xx_hal_timebase_tim.c
     src/platform/system_stm32f4xx.c
     src/platform/stm32f4xx_it.c
+    src/platform/mpu.cpp
+    src/platform/isr_handlers.cpp
 )
 
 # C++ only options

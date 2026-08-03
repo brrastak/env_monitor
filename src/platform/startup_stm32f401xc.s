@@ -108,11 +108,11 @@ LoopFillZerobss:
  * @param  None     
  * @retval None       
 */
-    .section  .text.Default_Handler,"ax",%progbits
-Default_Handler:
-Infinite_Loop:
-  b  Infinite_Loop
-  .size  Default_Handler, .-Default_Handler
+@     .section  .text.Default_Handler,"ax",%progbits
+@ Default_Handler:
+@ Infinite_Loop:
+@   b  Infinite_Loop
+@   .size  Default_Handler, .-Default_Handler
 /******************************************************************************
 *
 * The minimal vector table for a Cortex M3. Note that the proper constructs
@@ -242,10 +242,10 @@ g_pfnVectors:
    .thumb_set NMI_Handler,Default_Handler
   
    .weak      HardFault_Handler
-   .thumb_set HardFault_Handler,Default_Handler
+@    .thumb_set HardFault_Handler,Default_Handler
   
    .weak      MemManage_Handler
-   .thumb_set MemManage_Handler,Default_Handler
+@    .thumb_set MemManage_Handler,Default_Handler
   
    .weak      BusFault_Handler
    .thumb_set BusFault_Handler,Default_Handler
@@ -332,7 +332,7 @@ g_pfnVectors:
    .thumb_set TIM1_UP_TIM10_IRQHandler,Default_Handler
       
    .weak      TIM1_TRG_COM_TIM11_IRQHandler      
-   .thumb_set TIM1_TRG_COM_TIM11_IRQHandler,Default_Handler
+@    .thumb_set TIM1_TRG_COM_TIM11_IRQHandler,Default_Handler
       
    .weak      TIM1_CC_IRQHandler   
    .thumb_set TIM1_CC_IRQHandler,Default_Handler
