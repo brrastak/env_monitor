@@ -23,9 +23,9 @@ extern "C" void HardFault_Handler(void) {
     CALL_HANDLER(hard_fault_handler);
 }
 
-extern "C" void Default_Handler(void) {
-    CALL_HANDLER(default_handler);
-}
+// extern "C" void Default_Handler(void) {
+//     CALL_HANDLER(default_handler);
+// }
 
 extern "C" void mem_manage_handler() {
 
