@@ -54,6 +54,7 @@ etl::string<20> Sensor::error_name(Error error) {
         return "Byte number error";
     case Error::UnknownError:
         return "Unknown error";
+    default: return "";
     }
 }
 

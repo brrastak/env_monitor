@@ -1,7 +1,9 @@
 #include "lvgl_init.hpp"
 #include "board.hpp"
 #include "etl/chrono.h"
+#include "etl/singleton.h"
 #include "platform/cube_generated_init.h"
+#include "platform/mpu.hpp"
 
 namespace bsp {
 
@@ -13,6 +15,8 @@ Board::Board() {
 
     SystemClock_Config();
 
+    init_mpu();
+
     MX_GPIO_Init();
     // For SCD41 sensor
     MX_I2C1_Init();
@@ -22,16 +26,19 @@ Board::Board() {
     lvgl::init();
 }
 
-Led Board::led() {
-    return Led{GPIOC, GPIO_PIN_13};
+Led& Board::led() {
+    etl::singleton<Led>::create(GPIOC, GPIO_PIN_13);
+    return etl::singleton<Led>::instance();
 }
 
-Iwdg Board::iwdg() {
-    return Iwdg{500_ms};
+Iwdg& Board::iwdg() {
+    etl::singleton<Iwdg>::create(500_ms);
+    return etl::singleton<Iwdg>::instance();
 }
 
-Sensor Board::sensor() {
-    return Sensor{};
+Sensor& Board::sensor() {
+    etl::singleton<Sensor>::create();
+    return etl::singleton<Sensor>::instance();
 }
 
 }

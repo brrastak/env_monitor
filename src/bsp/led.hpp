@@ -16,6 +16,11 @@ public:
 private:
     GPIO_TypeDef* m_port;
     uint16_t m_pin;
+
+    Led(const Led&) = delete;
+    Led& operator=(const Led&) = delete;
+    Led(Led&&) = delete;
+    Led& operator=(Led&&) = delete;
 };
 
 }

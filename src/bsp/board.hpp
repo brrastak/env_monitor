@@ -10,9 +10,10 @@ class Board
 {
 public:
     Board();
-    Led led();
-    Iwdg iwdg();
-    Sensor sensor();
+
+    Led& led();
+    Iwdg& iwdg();
+    Sensor& sensor();
 };
 
 }

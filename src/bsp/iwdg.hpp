@@ -14,6 +14,11 @@ public:
 
 private:
     IWDG_HandleTypeDef hiwdg;
+
+    Iwdg(const Iwdg&) = delete;
+    Iwdg& operator=(const Iwdg&) = delete;
+    Iwdg(Iwdg&&) = delete;
+    Iwdg& operator=(Iwdg&&) = delete;
 };
 
 }

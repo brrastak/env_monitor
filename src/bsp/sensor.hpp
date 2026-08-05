@@ -36,6 +36,12 @@ public:
     std::expected<Data, Error> read();
 
     static etl::string<20> error_name(Error);
+
+private:
+    Sensor(const Sensor&) = delete;
+    Sensor& operator=(const Sensor&) = delete;
+    Sensor(Sensor&&) = delete;
+    Sensor& operator=(Sensor&&) = delete;
 };
 
 }
