@@ -11,8 +11,9 @@ namespace task {
 
 class IwdgFeeder : public rtos::Task {
 public:
-    static void create(bsp::Iwdg& iwdg, rtos::TaskPriority priority, size_t stackSize = rtos::MIN_STACK_SIZE) {
-        static IwdgFeeder instance{iwdg, priority, stackSize};
+    static void create(bsp::Iwdg& iwdg, rtos::TaskPriority priority, size_t stack_size = rtos::MIN_STACK_SIZE) {
+        static IwdgFeeder instance{iwdg};
+        instance.init(priority, stack_size);
     }
 
 protected:
@@ -28,8 +29,8 @@ protected:
     }
 
 private:
-    IwdgFeeder(bsp::Iwdg& iwdg, rtos::TaskPriority priority, size_t stackSize)
-        : Task{priority, stackSize}, m_iwdg{iwdg} {}
+    IwdgFeeder(bsp::Iwdg& iwdg)
+        : Task{}, m_iwdg{iwdg} {}
 
     bsp::Iwdg& m_iwdg;
 };

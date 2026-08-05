@@ -6,15 +6,18 @@
 #include "rtos/rtos.hpp"
 #include "rtos/task.hpp"
 #include "log/log.hpp"
+#include "etl/chrono.h"
 
 using namespace etl::chrono_literals;
+
 
 namespace task {
 
 class Heartbit : public rtos::Task {
 public:
-    static void create(bsp::Led& led, rtos::TaskPriority priority, size_t stackSize = rtos::MIN_STACK_SIZE) {
-        static Heartbit instance{led, priority, stackSize};
+    static void create(bsp::Led& led, rtos::TaskPriority priority, size_t stack_size = rtos::MIN_STACK_SIZE) {
+        static Heartbit instance{led};
+        instance.init(priority, stack_size);
     }
     
 protected:
@@ -31,8 +34,8 @@ protected:
     }
 
 private:
-    Heartbit(bsp::Led& led, rtos::TaskPriority priority, size_t stackSize)
-        : Task{priority, stackSize}, m_led{led} {}
+    Heartbit(bsp::Led& led)
+        : Task{}, m_led{led} {}
 
     bsp::Led& m_led;
 };
