@@ -59,6 +59,7 @@ add_executable(${EXECUTABLE}
     src/platform/stm32f4xx_it.c
     src/platform/mpu.cpp
     src/platform/isr_handlers.cpp
+    src/rtos/stack_overflow.cpp
 )
 
 # C++ only options
